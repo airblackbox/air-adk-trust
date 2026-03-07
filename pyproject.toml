@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "air-adk-trust"
+version = "0.1.0"
+description = "AIR Trust Layer for Google Agent Development Kit (ADK) — EU AI Act compliance via plugin callbacks"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+authors = [
+    {name = "AIR Blackbox", email = "hello@airblackbox.com"},
+]
+keywords = [
+    "google-adk", "agent-development-kit", "ai-safety", "audit",
+    "trust", "security", "llm", "agents", "eu-ai-act", "compliance",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "pydantic>=2.5.0",
+]
+
+[project.optional-dependencies]
+adk = ["google-adk>=1.0.0"]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/airblackbox/air-adk-trust"
+Repository = "https://github.com/airblackbox/air-adk-trust"
+Issues = "https://github.com/airblackbox/air-adk-trust/issues"
+Documentation = "https://airblackbox.ai"
+
+[tool.setuptools.packages.find]
+include = ["air_adk_trust*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
