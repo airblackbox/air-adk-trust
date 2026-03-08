@@ -1,5 +1,7 @@
 # air-adk-trust
 
+[![CI](https://github.com/airblackbox/air-adk-trust/actions/workflows/ci.yml/badge.svg)](https://github.com/airblackbox/air-adk-trust/actions/workflows/ci.yml)
+
 **EU AI Act compliance for Google Agent Development Kit (ADK) agents.**
 
 Drop-in plugin that adds tamper-evident audit logging, PII detection, prompt injection scanning, and tool policy enforcement to any ADK agent — including multi-agent hierarchies.

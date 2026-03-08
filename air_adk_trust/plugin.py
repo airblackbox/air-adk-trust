@@ -19,7 +19,7 @@ from typing import Any, Optional
 
 from .audit_chain import AuditChain
 from .config import AIRConfig, RISK_ORDER, RiskLevel
-from .detectors import redact_pii, scan_injection, scan_pii
+from .detectors import scan_injection, scan_pii
 
 logger = logging.getLogger("air_adk_trust")
 
