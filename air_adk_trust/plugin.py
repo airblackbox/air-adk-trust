@@ -20,6 +20,7 @@ from typing import Any, Optional
 from .audit_chain import AuditChain
 from .config import AIRConfig, RISK_ORDER, RiskLevel
 from .detectors import scan_injection, scan_pii
+from .gate_client import GateClient
 
 logger = logging.getLogger("air_adk_trust")
 
@@ -102,6 +103,12 @@ class AIRBlackboxPlugin:
         self._error_count: int = 0
         self._loop_count: int = 0
         self._invocation_id: str | None = None
+
+        # Gate client for centralized policy enforcement
+        self.gate = GateClient(
+            gateway_url=self.config.audit.gateway_url,
+            gateway_key=self.config.audit.gateway_key,
+        )
 
     # ── ADK Callback: before_agent ──────────────────────────────
     def before_agent_callback(
@@ -321,22 +328,50 @@ class AIRBlackboxPlugin:
             **kwargs,
         }
 
-        # Check if tool is blocked
-        if tool_name in self.config.blocked_tools:
-            metadata["blocked"] = True
-            logger.warning(f"[AIR] Blocked tool: {tool_name}")
-
-        # Check if tool exceeds risk tier
-        if RISK_ORDER.get(risk, 0) > RISK_ORDER.get(self.config.risk_tier, 1):
-            metadata["exceeds_risk_tier"] = True
-            logger.warning(
-                f"[AIR] Tool {tool_name} risk ({risk.value}) exceeds "
-                f"tier ({self.config.risk_tier.value})"
+        # Gate policy check (if configured) — centralized enforcement
+        gate_decision = None
+        if self.gate.is_configured:
+            gate_decision = self.gate.submit_action(
+                agent_id=agent_name or "adk-agent",
+                action_type="tool_call",
+                tool_name=tool_name,
+                payload=tool_args or {},
             )
+            if gate_decision:
+                decision = gate_decision.get("decision", "")
+                metadata["gate_decision"] = decision
+                metadata["gate_event_id"] = gate_decision.get("event_id", "")
 
-        # Check if tool requires confirmation
-        if tool_name in self.config.require_confirmation_tools:
-            metadata["requires_confirmation"] = True
+                if decision == "blocked":
+                    metadata["blocked"] = True
+                    metadata["blocked_by"] = "gate"
+                    logger.warning(
+                        f"[AIR] Gate BLOCKED: {tool_name} — {gate_decision.get('reason', '')}"
+                    )
+                elif decision == "pending_approval":
+                    metadata["pending_approval"] = True
+                    logger.info(f"[AIR] Gate PENDING: {tool_name} — sent to Slack")
+                elif decision == "auto_allowed":
+                    logger.debug(f"[AIR] Gate AUTO-ALLOWED: {tool_name}")
+
+        # Local policy checks (fallback if Gate not configured)
+        if not gate_decision:
+            # Check if tool is blocked
+            if tool_name in self.config.blocked_tools:
+                metadata["blocked"] = True
+                logger.warning(f"[AIR] Blocked tool: {tool_name}")
+
+            # Check if tool exceeds risk tier
+            if RISK_ORDER.get(risk, 0) > RISK_ORDER.get(self.config.risk_tier, 1):
+                metadata["exceeds_risk_tier"] = True
+                logger.warning(
+                    f"[AIR] Tool {tool_name} risk ({risk.value}) exceeds "
+                    f"tier ({self.config.risk_tier.value})"
+                )
+
+            # Check if tool requires confirmation
+            if tool_name in self.config.require_confirmation_tools:
+                metadata["requires_confirmation"] = True
 
         # PII scan on tool args
         pii_detected = False

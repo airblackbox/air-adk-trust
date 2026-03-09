@@ -1,0 +1,155 @@
+{
+  "entries": [
+    {
+      "id": "d46160f2-97c4-44f4-9ef9-58f15f868379",
+      "sequence": 1,
+      "hash": "259ad441396c7ecb7970403e9560a21f5cf54c73353ef1facf9d4993662d597e",
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "79786a964c6e61c67943af0dddd4586396f0b294c0685212d2e90f5cac75c9a9",
+      "timestamp": "2026-03-09T15:08:38.237919+00:00",
+      "event_type": "agent_start",
+      "agent_name": "recruiting-agent",
+      "tool_name": null,
+      "risk_level": "medium",
+      "pii_detected": false,
+      "injection_detected": false,
+      "injection_score": 0.0,
+      "session_id": "f6406f8a-f996-4440-ae9f-9f6041ac1613",
+      "invocation_id": "8cc5af63-bc1f-490e-89e8-3b686fefd6fc",
+      "metadata": {
+        "action": "before_agent"
+      }
+    },
+    {
+      "id": "12d18b45-7197-4e2c-a26b-8754f086229c",
+      "sequence": 2,
+      "hash": "01ea20e3dd45e8f9aa8f074e1965a7e0f6add6e0a7bf8bb1a5a86a9b795e4180",
+      "prev_hash": "259ad441396c7ecb7970403e9560a21f5cf54c73353ef1facf9d4993662d597e",
+      "signature": "1490c7ef23d3413727c0c75e3d17253ed9c39ce0ed10f6fd5a470b21b68f2d50",
+      "timestamp": "2026-03-09T15:08:38.239861+00:00",
+      "event_type": "tool_call",
+      "agent_name": "recruiting-agent",
+      "tool_name": "web_search",
+      "risk_level": "medium",
+      "pii_detected": false,
+      "injection_detected": false,
+      "injection_score": 0.0,
+      "session_id": "f6406f8a-f996-4440-ae9f-9f6041ac1613",
+      "invocation_id": "8cc5af63-bc1f-490e-89e8-3b686fefd6fc",
+      "metadata": {
+        "action": "before_tool",
+        "risk_level": "medium"
+      }
+    },
+    {
+      "id": "01201262-bbce-4a6b-9040-53d6389b8375",
+      "sequence": 3,
+      "hash": "d4fe53cf42f4700d9f322b2e867431c1a14e996029c8b101643448cd2236f1b9",
+      "prev_hash": "01ea20e3dd45e8f9aa8f074e1965a7e0f6add6e0a7bf8bb1a5a86a9b795e4180",
+      "signature": "690238137bec82ddbddd141416b1a7b7cc1b459f03ee8964a91a9b6421392813",
+      "timestamp": "2026-03-09T15:08:38.240356+00:00",
+      "event_type": "tool_result",
+      "agent_name": "recruiting-agent",
+      "tool_name": "web_search",
+      "risk_level": "none",
+      "pii_detected": false,
+      "injection_detected": false,
+      "injection_score": 0.0,
+      "session_id": "f6406f8a-f996-4440-ae9f-9f6041ac1613",
+      "invocation_id": "8cc5af63-bc1f-490e-89e8-3b686fefd6fc",
+      "metadata": {
+        "action": "after_tool"
+      }
+    },
+    {
+      "id": "2ba24c03-c87f-47de-ade4-bc8494e07184",
+      "sequence": 4,
+      "hash": "92ecd33aa2ce4187ce07f538bc2bce1c96e46dd435a48132ec2f87355f3e0537",
+      "prev_hash": "d4fe53cf42f4700d9f322b2e867431c1a14e996029c8b101643448cd2236f1b9",
+      "signature": "2d868b317190fdeea0cb27f061027dd66817f6cd53518b18efbbde2517d9e895",
+      "timestamp": "2026-03-09T15:08:38.241071+00:00",
+      "event_type": "tool_call",
+      "agent_name": "recruiting-agent",
+      "tool_name": "send_email",
+      "risk_level": "high",
+      "pii_detected": true,
+      "injection_detected": false,
+      "injection_score": 0.0,
+      "session_id": "f6406f8a-f996-4440-ae9f-9f6041ac1613",
+      "invocation_id": "8cc5af63-bc1f-490e-89e8-3b686fefd6fc",
+      "metadata": {
+        "action": "before_tool",
+        "risk_level": "high",
+        "exceeds_risk_tier": true,
+        "pii_findings": [
+          "email"
+        ]
+      }
+    },
+    {
+      "id": "154ecfb1-c445-4d87-9bfb-552b34902054",
+      "sequence": 5,
+      "hash": "240fe9713af0af29ca9d113263e4c3b7f2e598472f58984839f83494326aa411",
+      "prev_hash": "92ecd33aa2ce4187ce07f538bc2bce1c96e46dd435a48132ec2f87355f3e0537",
+      "signature": "114e5dde5d7aac19deee899fcbb80c8341b8c94ed50b56491bc884ae72e26d7e",
+      "timestamp": "2026-03-09T15:08:38.241535+00:00",
+      "event_type": "tool_result",
+      "agent_name": "recruiting-agent",
+      "tool_name": "send_email",
+      "risk_level": "none",
+      "pii_detected": false,
+      "injection_detected": false,
+      "injection_score": 0.0,
+      "session_id": "f6406f8a-f996-4440-ae9f-9f6041ac1613",
+      "invocation_id": "8cc5af63-bc1f-490e-89e8-3b686fefd6fc",
+      "metadata": {
+        "action": "after_tool"
+      }
+    },
+    {
+      "id": "1df19ad7-6f17-4d7f-8d54-cc702974e403",
+      "sequence": 6,
+      "hash": "6703f305d3a93edd0c3078582743b8b4cd25795e9c18fe0a9b7197342f897626",
+      "prev_hash": "240fe9713af0af29ca9d113263e4c3b7f2e598472f58984839f83494326aa411",
+      "signature": "a10c23e025ecb2f7ecbcf1e61dbfe3f5f41f9dfb30cd0d59b17b0e445246d153",
+      "timestamp": "2026-03-09T15:08:38.242327+00:00",
+      "event_type": "tool_call",
+      "agent_name": "recruiting-agent",
+      "tool_name": "shell",
+      "risk_level": "critical",
+      "pii_detected": false,
+      "injection_detected": false,
+      "injection_score": 0.0,
+      "session_id": "f6406f8a-f996-4440-ae9f-9f6041ac1613",
+      "invocation_id": "8cc5af63-bc1f-490e-89e8-3b686fefd6fc",
+      "metadata": {
+        "action": "before_tool",
+        "risk_level": "critical",
+        "exceeds_risk_tier": true
+      }
+    },
+    {
+      "id": "801e1ceb-4cc0-4c4b-9343-a3762102e8a1",
+      "sequence": 7,
+      "hash": "62e46db95e5cbfa7dfe3b6c4bcf77a125147d0167e6c830530072a873c2e8525",
+      "prev_hash": "6703f305d3a93edd0c3078582743b8b4cd25795e9c18fe0a9b7197342f897626",
+      "signature": "c5d7d4b6f4ef7965e63e1442e8671f30b569c854869b7ee8f2d3d0271de87867",
+      "timestamp": "2026-03-09T15:08:38.242969+00:00",
+      "event_type": "agent_complete",
+      "agent_name": "recruiting-agent",
+      "tool_name": null,
+      "risk_level": "none",
+      "pii_detected": false,
+      "injection_detected": false,
+      "injection_score": 0.0,
+      "session_id": "f6406f8a-f996-4440-ae9f-9f6041ac1613",
+      "invocation_id": "8cc5af63-bc1f-490e-89e8-3b686fefd6fc",
+      "metadata": {
+        "action": "after_agent"
+      }
+    }
+  ],
+  "sequence": 7,
+  "last_hash": "62e46db95e5cbfa7dfe3b6c4bcf77a125147d0167e6c830530072a873c2e8525",
+  "saved_at": "2026-03-09T15:08:38.243071+00:00"
+}

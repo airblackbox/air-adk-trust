@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "air-adk-trust"
-version = "0.1.0"
-description = "AIR Trust Layer for Google Agent Development Kit (ADK) — EU AI Act compliance via plugin callbacks"
+version = "0.2.0"
+description = "AIR Trust Layer for Google Agent Development Kit (ADK) — EU AI Act compliance with Gate policy enforcement"
 readme = "README.md"
 license = {text = "Apache-2.0"}
 requires-python = ">=3.10"

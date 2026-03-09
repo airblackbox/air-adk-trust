@@ -14,6 +14,7 @@ Usage:
 from .audit_chain import AuditChain, AuditEntry, ChainVerification
 from .config import AIRConfig, AuditConfig, RiskLevel
 from .detectors import redact_pii, scan_injection, scan_pii
+from .gate_client import GateClient
 from .plugin import AIRBlackboxPlugin, classify_tool_risk
 
 __all__ = [
@@ -23,6 +24,7 @@ __all__ = [
     "AuditChain",
     "AuditEntry",
     "ChainVerification",
+    "GateClient",
     "RiskLevel",
     "classify_tool_risk",
     "scan_pii",
@@ -30,4 +32,4 @@ __all__ = [
     "redact_pii",
 ]
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
