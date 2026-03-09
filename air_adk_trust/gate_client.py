@@ -24,7 +24,7 @@ import json
 import logging
 import urllib.request
 import urllib.error
-from typing import Any, Optional
+from typing import Any
 
 logger = logging.getLogger("air_trust.gate_client")
 
